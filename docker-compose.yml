@@ -1,0 +1,53 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: assinaturas-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      TZ: ${TZ:-America/Sao_Paulo}
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      SFTP_HOST: ${SFTP_HOST}
+      SFTP_PORT: ${SFTP_PORT}
+      SFTP_USER: ${SFTP_USER}
+      SFTP_PASS: ${SFTP_PASS}
+      SFTP_BASE_URL: ${SFTP_BASE_URL}
+      NEXT_PUBLIC_SFTP_BASE_URL: ${NEXT_PUBLIC_SFTP_BASE_URL}
+      SFTP_REMOTE_DIR: ${SFTP_REMOTE_DIR}
+    ports:
+      - "3001:3001"
+    networks:
+      - assinaturas
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_SFTP_BASE_URL: ${NEXT_PUBLIC_SFTP_BASE_URL}
+    container_name: assinaturas-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      TZ: ${TZ:-America/Sao_Paulo}
+    ports:
+      - "3000:3000"
+    networks:
+      - assinaturas
+    depends_on:
+      - backend
+
+volumes:
+  assinaturas-db:
+
+networks:
+  assinaturas:
+    driver: bridge
