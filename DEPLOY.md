@@ -79,11 +79,12 @@ Exemplo:
 ```env
 TZ=America/Sao_Paulo
 
-BACKEND_IMAGE=ghcr.io/sidneyjunio-nerus/assinatura-nerus/backend:latest
-FRONTEND_IMAGE=ghcr.io/sidneyjunio-nerus/assinatura-nerus/frontend:latest
 BACKEND_PORT=3001
 FRONTEND_PORT=3000
 
+DB_HOST=host.docker.internal
+DB_PORT=3306
+DB_USER=usuario_mysql
 DB_PASS=senha_forte_do_mysql
 DB_NAME=assinaturas
 
