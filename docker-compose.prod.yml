@@ -1,4 +1,23 @@
 services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: assinaturas-caddy
+    restart: unless-stopped
+    env_file:
+      - ${ENV_FILE:-.env.production}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - assinaturas
+
   backend:
     image: ghcr.io/sidneyjunio-nerus/assinatura-nerus/backend:latest
     container_name: assinaturas-backend
@@ -10,8 +29,6 @@ services:
     environment:
       NODE_ENV: production
       TZ: ${TZ:-America/Sao_Paulo}
-    ports:
-      - "${BACKEND_PORT:-3001}:3001"
     networks:
       - assinaturas
 
@@ -22,12 +39,14 @@ services:
     environment:
       NODE_ENV: production
       TZ: ${TZ:-America/Sao_Paulo}
-    ports:
-      - "${FRONTEND_PORT:-3000}:3000"
     depends_on:
       - backend
     networks:
       - assinaturas
+
+volumes:
+  caddy-data:
+  caddy-config:
 
 networks:
   assinaturas:
