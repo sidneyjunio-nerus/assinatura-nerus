@@ -24,12 +24,11 @@ Depois acesse:
 Crie as variaveis:
 
 ```env
-NEXT_PUBLIC_API_URL=https://assinaturas-emails.nerus.com.br/api
+NEXT_PUBLIC_API_URL=https://dominio-ou-ip-do-cliente:3001
 NEXT_PUBLIC_SFTP_BASE_URL=https://assinaturas.nerus.com.br
 ```
 
 Essas variaveis entram no build da imagem do frontend.
-Se `NEXT_PUBLIC_API_URL` ficar como `localhost`, o navegador do usuario vai tentar chamar a API na propria maquina dele, nao no servidor.
 
 ## 2. Fazer a imagem subir sozinha
 
@@ -71,7 +70,6 @@ cd /opt/assinatura-nerus
 Coloque estes arquivos nessa pasta:
 
 - `docker-compose.prod.yml`
-- `Caddyfile`
 - `.env.production`
 
 Voce pode criar o `.env.production` a partir do `.env.production.example`.
@@ -81,7 +79,8 @@ Exemplo:
 ```env
 TZ=America/Sao_Paulo
 
-APP_DOMAIN=assinaturas-emails.nerus.com.br
+BACKEND_PORT=3001
+FRONTEND_PORT=3000
 
 DB_HOST=host.docker.internal
 DB_PORT=3306
@@ -97,13 +96,6 @@ SFTP_BASE_URL=https://assinaturas.nerus.com.br
 SFTP_REMOTE_DIR=/
 NEXT_PUBLIC_SFTP_BASE_URL=https://assinaturas.nerus.com.br
 ```
-
-Com o `docker-compose.prod.yml`, o Caddy publica as portas `80` e `443`, emite o certificado HTTPS automaticamente e roteia:
-
-- `https://assinaturas-emails.nerus.com.br/` para o frontend.
-- `https://assinaturas-emails.nerus.com.br/api/*` para o backend.
-
-Antes de subir, aponte o DNS do tipo `A` de `assinaturas-emails.nerus.com.br` para o IP publico do servidor e libere as portas `80` e `443` no firewall/security group.
 
 ## 4. Login no registry
 
