@@ -11,6 +11,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get("/", (_req, res) => {
+  res.json({
+    ok: true,
+    service: "assinaturas-backend",
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.use("/signatures", signatureRoutes);
 app.use("/upload", uploadRoutes);
 AppDataSource.initialize()
