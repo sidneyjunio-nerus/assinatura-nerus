@@ -465,7 +465,7 @@ export default function Home() {
             <div className="panelHeader">
               <div>
                 <p className="eyebrow">Prévia</p>
-                <h2>Como ficara no Gmail</h2>
+                <h2>Como ficará no Gmail</h2>
               </div>
               <button className="ghostButton" type="button" onClick={copyHtml} disabled={!selectedSignature}>
                 {copied ? <Check size={16} /> : <Clipboard size={16} />}
