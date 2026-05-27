@@ -69,7 +69,7 @@ function buildSignatureHtml(signature: Signature) {
       <div style="font-size: 15px; line-height: 18px; font-weight: 600;color: #000009; margin: 0 0 14px;">${signature.cargo}</div>
       <div style="font-size: 13px; line-height: 18px; font-weight: 550; color: #4b5563; margin: 0 0 10px;">${phones}</div>
       <div style="font-size: 14px; line-height: 18px; font-weight: 700; color: #c1121f; margin: 0 0 10px;">Movidos pelo crescimento e sucesso do cliente!</div>
-      <img src="${SIGNATURE_LOGO_URL}" alt="Nerus" width="118" style="display: block; max-width: 118px;" />
+      <img src="${SIGNATURE_LOGO_URL}" alt="Nérus" width="118" style="display: block; max-width: 118px;" />
       <div style="font-size: 14px; line-height: 18px; color: #c1121f; margin: 0 0 8px;">www.nerus.com.br</div>
     </td>
   </tr>
@@ -316,10 +316,10 @@ export default function Home() {
 
       <header className="topbar">
         <div className="brand">
-          <img src={HEADER_LOGO_URL} alt="Nerus" />
+          <img src={HEADER_LOGO_URL} alt="Nérus" />
           <div>
-            <p className="eyebrow">Assinaturas Nerus</p>
-            <h1>Assinaturas Nerus</h1>
+            <p className="eyebrow">Assinaturas Nérus</p>
+            <h1>Assinaturas Nérus</h1>
           </div>
         </div>
         <button className="iconButton" type="button" onClick={loadSignatures} title="Atualizar">
@@ -391,7 +391,7 @@ export default function Home() {
           <div className="uploadBox">
             <div className="uploadPreview">
               {form.imagem ? (
-                <img src={form.imagem} alt="Previa" />
+                <img src={form.imagem} alt="Prévia" />
               ) : (
                 <ImagePlus size={28} />
               )}
@@ -464,7 +464,7 @@ export default function Home() {
           <div className="panel previewPanel">
             <div className="panelHeader">
               <div>
-                <p className="eyebrow">Previa</p>
+                <p className="eyebrow">Prévia</p>
                 <h2>Como ficara no Gmail</h2>
               </div>
               <button className="ghostButton" type="button" onClick={copyHtml} disabled={!selectedSignature}>
